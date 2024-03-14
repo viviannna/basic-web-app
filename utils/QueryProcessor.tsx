@@ -148,6 +148,18 @@ if (powerMatch !== null) {
   return result.toString(); // Return the result of the power operation as a string
 } 
 
+const additionRegex = /what is (\d+) plus (\d+) plus (\d+)\?/i;
+const additionMatch = query.toLowerCase().match(additionRegex);
+
+if (additionMatch !== null) {
+  const number1 = parseInt(additionMatch[1]);
+  const number2 = parseInt(additionMatch[2]);
+  const number3 = parseInt(additionMatch[3]);
+  
+  const result = number1 + number2 + number3;
+  return result.toString(); // Return the result of the addition as a string
+} 
+
 
   return "";
 }
