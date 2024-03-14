@@ -55,8 +55,7 @@ if (additionMatch !== null) {
   const result = number1 + number2 + number3;
   return result.toString(); // Return the result of the addition as a string
 } 
-
-
+else {
   /** Sum */
   const regex = /what is (\d+) plus (\d+)/i;
   const match = query.toLowerCase().match(regex);
@@ -68,6 +67,11 @@ if (additionMatch !== null) {
     const sum = number1 + number2;
     return sum.toString(); // Return the sum as a string
   } 
+
+}
+
+
+  
 
     /** Mult */
   const regex_mul = /what is (\d+) multiplied by (\d+)/i;
