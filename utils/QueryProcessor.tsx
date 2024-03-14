@@ -21,44 +21,7 @@ export default function QueryProcessor(query: string): string {
     );
   }
 
-  if (query.toLowerCase().includes("Which of the following numbers is the largest: 81, 63, 21")) {
-    return (
-      "81"
-    );
-  }
-
-  if (query.toLowerCase().includes("Which of the following numbers is the largest: 25, 71, 85")) {
-    return (
-      "85"
-    );
-  }
-
-  if (query.toLowerCase().includes("What is 26 plus 56")) {
-    return (
-      "82"
-    );
-  }
-
-  if (query.toLowerCase().includes("What is 17 plus 32")) {
-    return (
-      "49"
-    );
-  }
-
-  if (query.toLowerCase().includes("What is 54 plus 36")) {
-    return (
-      "90"
-    );
-  }
-
-  if (query.toLowerCase().includes("What is 54 plus 36")) {
-    return (
-      "90"
-    );
-  }
-
-  
-  
+  /** Largest number */
   if (query.toLowerCase().includes("which of the following numbers is the largest")) {
     const numbersMatch = query.match(/\d+/g);
   
@@ -80,6 +43,7 @@ export default function QueryProcessor(query: string): string {
     }
   }
 
+  /** Sum */
   const regex = /What is (\d+) plus (\d+)/i;
   const match = query.match(regex);
 
@@ -89,14 +53,19 @@ export default function QueryProcessor(query: string): string {
     
     const sum = number1 + number2;
     return sum.toString(); // Return the sum as a string
-  } else {
-    return "Query format not recognized. Please use 'What is {number1} plus {number2}'."; // Return a message if the query format is incorrect
-  }
+  } 
 
-  
-  
-  
+    /** Mult */
+  const regex_mul = /what is (\d+) multiplied by (\d+)\?/i;
+  const match_mul = query.match(regex);
 
+    if (match_mul !== null) {
+      const number1 = parseInt(match_mul[1]);
+      const number2 = parseInt(match_mul[2]);
+      
+      const product = number1 * number2;
+      return product.toString(); // Return the product as a string
+    } 
 
 
   return "";
