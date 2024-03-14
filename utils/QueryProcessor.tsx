@@ -126,5 +126,21 @@ function isPrime(num: number): boolean {
 }
 
 
+/** minus */
+const subtractionRegex = /what is (\d+) minus (\d+)\?/i;
+const subtractionMatch = query.toLowerCase().match(subtractionRegex);
+
+if (subtractionMatch !== null) {
+  const number1 = parseInt(subtractionMatch[1]);
+  const number2 = parseInt(subtractionMatch[2]);
+  
+  const difference = number1 - number2;
+  console.log(difference.toString()); // Return the difference as a string
+} else {
+  console.log("Query format not recognized. Please use 'What is {number1} minus {number2}?'.");
+}
+
+
+
   return "";
 }
