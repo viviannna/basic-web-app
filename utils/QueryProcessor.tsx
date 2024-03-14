@@ -44,7 +44,7 @@ export default function QueryProcessor(query: string): string {
   }
 
   /** Sum */
-  const regex = /Wwat is (\d+) plus (\d+)/i;
+  const regex = /what is (\d+) plus (\d+)/i;
   const match = query.toLowerCase().match(regex);
   
   if (match !== null) {
@@ -69,9 +69,9 @@ export default function QueryProcessor(query: string): string {
 
   /** square and cube */
   const squareAndCubeRegex = /which of the following numbers is both a square and a cube: (.*)\?/i;
-  const squareAndCubeMatch = query.match(squareAndCubeRegex);
+  const squareAndCubeMatch = query.toLowerCase().match(squareAndCubeRegex);
 
-if (squareAndCubeMatch !== null) {
+  if (squareAndCubeMatch !== null) {
   const numbersList = squareAndCubeMatch[1].split(',').map(Number);
   const squareAndCubeResult: number[] = [];
 
@@ -89,9 +89,7 @@ if (squareAndCubeMatch !== null) {
   } else {
     return "None of the numbers are both squares and cubes."; // Return if no such number is found
   }
-} 
-
-
+  } 
 
   return "";
 }
