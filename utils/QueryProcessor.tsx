@@ -39,7 +39,7 @@ export default function QueryProcessor(query: string): string {
         return "No valid numbers found in the query."; // Return a message if no valid numbers were found
       }
     } else {
-      
+
       return "No numbers found in the query."; // Return a message if no numbers were found
     }
   }
@@ -92,7 +92,8 @@ export default function QueryProcessor(query: string): string {
   }
   } 
 
-const primesRegex = /which of the following numbers are primes: (.*)\?/i;
+
+  const primesRegex = /which of the following numbers are primes: (.*)\?/i;
 const primesMatch = query.toLowerCase().match(primesRegex);
 
 if (primesMatch !== null) {
@@ -100,29 +101,31 @@ if (primesMatch !== null) {
   const primesResult: number[] = [];
 
   numbersList.forEach(number => {
-    if (isPrime(number)) {
+    if (number <= 1) {
+      return;
+    }
+    let isPrime = true;
+    for (let i = 2; i <= Math.sqrt(number); i++) {
+      if (number % i === 0) {
+        isPrime = false;
+        break;
+      }
+    }
+    if (isPrime) {
       primesResult.push(number);
     }
   });
 
   if (primesResult.length > 0) {
-    console.log(primesResult.join(', ')); // Return the prime numbers
+    return primesResult.join(', '); // Return the prime numbers
   } else {
-    console.log("None of the numbers are primes."); // Return if no prime number is found
+    return "None of the numbers are primes."; // Return if no prime number is found
   }
-} 
-
-function isPrime(num: number): boolean {
-  if (num <= 1) {
-    return false;
-  }
-  for (let i = 2; i <= Math.sqrt(num); i++) {
-    if (num % i === 0) {
-      return false;
-    }
-  }
-  return true;
+} else {
+  return "Query format not recognized. Please use 'Which of the following numbers are primes: {number1}, {number2}, ... ?'.";
 }
+
+
 
 /** minus */
 const subtractionRegex = /what is (\d+) minus (\d+)\?/i;
@@ -134,9 +137,7 @@ if (subtractionMatch !== null) {
   
   const difference = number1 - number2;
   return difference.toString(); // Return the difference as a string
-} else {
-  return "Query format not recognized. Please use 'What is {number1} minus {number2}?'.";
-}
+} 
 
 
 
