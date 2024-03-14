@@ -67,6 +67,33 @@ export default function QueryProcessor(query: string): string {
       return product.toString(); // Return the product as a string
     } 
 
+  /** square and cube */
+  const squareAndCubeRegex = /which of the following numbers is both a square and a cube: (.*)\?/i;
+const squareAndCubeMatch = query.match(squareAndCubeRegex);
+
+if (squareAndCubeMatch !== null) {
+  const numbersList = squareAndCubeMatch[1].split(',').map(Number);
+  const squareAndCubeResult: number[] = [];
+
+  numbersList.forEach(number => {
+    const squareRoot = Math.sqrt(number);
+    const cubeRoot = Math.cbrt(number);
+    
+    if (Number.isInteger(squareRoot) && Number.isInteger(cubeRoot)) {
+      squareAndCubeResult.push(number);
+    }
+  });
+
+  if (squareAndCubeResult.length > 0) {
+    return squareAndCubeResult.join(', '); // Return the numbers that are both squares and cubes
+  } else {
+    return "None of the numbers are both squares and cubes."; // Return if no such number is found
+  }
+} else {
+  return "Query format not recognized. Please use 'Which of the following numbers is both a square and a cube: {number1}, {number2}, ... ?'.";
+}
+
+
 
   return "";
 }
