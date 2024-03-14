@@ -136,6 +136,17 @@ if (subtractionMatch !== null) {
   return difference.toString(); // Return the difference as a string
 } 
 
+/**pow */
+const powerRegex = /what is (\d+) to the power of (\d+)\?/i;
+const powerMatch = query.toLowerCase().match(powerRegex);
+
+if (powerMatch !== null) {
+  const base = parseInt(powerMatch[1]);
+  const exponent = parseInt(powerMatch[2]);
+  
+  const result = Math.pow(base, exponent);
+  return result.toString(); // Return the result of the power operation as a string
+} 
 
 
   return "";
