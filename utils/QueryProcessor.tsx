@@ -39,6 +39,7 @@ export default function QueryProcessor(query: string): string {
         return "No valid numbers found in the query."; // Return a message if no valid numbers were found
       }
     } else {
+      
       return "No numbers found in the query."; // Return a message if no numbers were found
     }
   }
@@ -91,7 +92,7 @@ export default function QueryProcessor(query: string): string {
   }
   } 
 
-  const primesRegex = /which of the following numbers are primes: (.*)\?/i;
+const primesRegex = /which of the following numbers are primes: (.*)\?/i;
 const primesMatch = query.toLowerCase().match(primesRegex);
 
 if (primesMatch !== null) {
@@ -109,9 +110,7 @@ if (primesMatch !== null) {
   } else {
     console.log("None of the numbers are primes."); // Return if no prime number is found
   }
-} else {
-  console.log("Query format not recognized. Please use 'Which of the following numbers are primes: {number1}, {number2}, ... ?'.");
-}
+} 
 
 function isPrime(num: number): boolean {
   if (num <= 1) {
@@ -125,7 +124,6 @@ function isPrime(num: number): boolean {
   return true;
 }
 
-
 /** minus */
 const subtractionRegex = /what is (\d+) minus (\d+)\?/i;
 const subtractionMatch = query.toLowerCase().match(subtractionRegex);
@@ -135,9 +133,9 @@ if (subtractionMatch !== null) {
   const number2 = parseInt(subtractionMatch[2]);
   
   const difference = number1 - number2;
-  console.log(difference.toString()); // Return the difference as a string
+  return difference.toString(); // Return the difference as a string
 } else {
-  console.log("Query format not recognized. Please use 'What is {number1} minus {number2}?'.");
+  return "Query format not recognized. Please use 'What is {number1} minus {number2}?'.";
 }
 
 
