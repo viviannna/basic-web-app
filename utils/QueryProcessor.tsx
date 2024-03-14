@@ -44,9 +44,9 @@ export default function QueryProcessor(query: string): string {
   }
 
   /** Sum */
-  const regex = /What is (\d+) plus (\d+)/i;
-  const match = query.match(regex);
-
+  const regex = /Wwat is (\d+) plus (\d+)/i;
+  const match = query.toLowerCase().match(regex);
+  
   if (match !== null) {
     const number1 = parseInt(match[1]);
     const number2 = parseInt(match[2]);
@@ -56,20 +56,20 @@ export default function QueryProcessor(query: string): string {
   } 
 
     /** Mult */
-  const regex_mul = /what is (\d+) multiplied by (\d+)\?/i;
-  const match_mul = query.match(regex);
+  const regex_mul = /what is (\d+) multiplied by (\d+)/i;
+  const match_mul = query.toLowerCase().match(regex_mul);
 
-    if (match_mul !== null) {
-      const number1 = parseInt(match_mul[1]);
-      const number2 = parseInt(match_mul[2]);
-      
-      const product = number1 * number2;
-      return product.toString(); // Return the product as a string
-    } 
+  if (match_mul !== null) {
+    const number1 = parseInt(match_mul[1]);
+    const number2 = parseInt(match_mul[2]);
+    
+    const product = number1 * number2;
+    return product.toString(); // Return the product as a string
+  } 
 
   /** square and cube */
   const squareAndCubeRegex = /which of the following numbers is both a square and a cube: (.*)\?/i;
-const squareAndCubeMatch = query.match(squareAndCubeRegex);
+  const squareAndCubeMatch = query.match(squareAndCubeRegex);
 
 if (squareAndCubeMatch !== null) {
   const numbersList = squareAndCubeMatch[1].split(',').map(Number);
@@ -89,9 +89,7 @@ if (squareAndCubeMatch !== null) {
   } else {
     return "None of the numbers are both squares and cubes."; // Return if no such number is found
   }
-} else {
-  return "Query format not recognized. Please use 'Which of the following numbers is both a square and a cube: {number1}, {number2}, ... ?'.";
-}
+} 
 
 
 
