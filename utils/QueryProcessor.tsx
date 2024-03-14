@@ -121,10 +121,7 @@ if (primesMatch !== null) {
   } else {
     return "None of the numbers are primes."; // Return if no prime number is found
   }
-} else {
-  return "Query format not recognized. Please use 'Which of the following numbers are primes: {number1}, {number2}, ... ?'.";
-}
-
+} 
 
 
 /** minus */
