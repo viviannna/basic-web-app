@@ -79,6 +79,20 @@ export default function QueryProcessor(query: string): string {
       return "No numbers found in the query."; // Return a message if no numbers were found
     }
   }
+
+  const regex = /What is (\d+) plus (\d+)/i;
+  const match = query.match(regex);
+
+  if (match !== null) {
+    const number1 = parseInt(match[1]);
+    const number2 = parseInt(match[2]);
+    
+    const sum = number1 + number2;
+    return sum.toString(); // Return the sum as a string
+  } else {
+    return "Query format not recognized. Please use 'What is {number1} plus {number2}'."; // Return a message if the query format is incorrect
+  }
+
   
   
   
