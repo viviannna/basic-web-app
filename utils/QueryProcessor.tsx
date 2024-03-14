@@ -91,5 +91,40 @@ export default function QueryProcessor(query: string): string {
   }
   } 
 
+  const primesRegex = /which of the following numbers are primes: (.*)\?/i;
+const primesMatch = query.toLowerCase().match(primesRegex);
+
+if (primesMatch !== null) {
+  const numbersList = primesMatch[1].split(',').map(Number);
+  const primesResult: number[] = [];
+
+  numbersList.forEach(number => {
+    if (isPrime(number)) {
+      primesResult.push(number);
+    }
+  });
+
+  if (primesResult.length > 0) {
+    console.log(primesResult.join(', ')); // Return the prime numbers
+  } else {
+    console.log("None of the numbers are primes."); // Return if no prime number is found
+  }
+} else {
+  console.log("Query format not recognized. Please use 'Which of the following numbers are primes: {number1}, {number2}, ... ?'.");
+}
+
+function isPrime(num: number): boolean {
+  if (num <= 1) {
+    return false;
+  }
+  for (let i = 2; i <= Math.sqrt(num); i++) {
+    if (num % i === 0) {
+      return false;
+    }
+  }
+  return true;
+}
+
+
   return "";
 }
